@@ -6,6 +6,7 @@ export const Dashboard = hoc(
   useDashboardProps,
   ({
     filteredData,
+    data,
     loading,
     setSearch,
     search,
@@ -33,7 +34,7 @@ export const Dashboard = hoc(
           onChange={onChange}
           pageSize={100}
           showSizeChanger={false}
-          total={filteredData.total_count}
+          total={!search ? data.total_count : filteredData.total_count}
         />
       </div>
     );

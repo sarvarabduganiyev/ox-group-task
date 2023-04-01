@@ -4,10 +4,12 @@ import { useDispatch } from "react-redux";
 import { authLogOut } from "../redux/slices/auth";
 import LOGO from "../assets/img/logo.jpg";
 import { Link } from "react-router-dom";
+import { storageService } from "../services/storage.service";
 function Layout({ children }) {
   const dispatch = useDispatch();
   const LogOutFunc = () => {
     dispatch(authLogOut());
+    storageService.removeAccessToken();
   };
   return (
     <div>

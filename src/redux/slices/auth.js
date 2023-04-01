@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { storageService } from "../../services/storage.service";
 
 const initialState = {
-  accessToken: false,
+  accessToken: storageService.getAccessToken() || null,
 };
 
 export const authSlice = createSlice({

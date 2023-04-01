@@ -52,8 +52,10 @@ export const useDashboardProps = () => {
         setLoading(false);
       });
   }, [current]);
+
   return {
     filteredData,
+    data,
     loading,
     setSearch,
     search,

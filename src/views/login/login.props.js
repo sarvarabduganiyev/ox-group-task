@@ -4,6 +4,7 @@ import { authTokenReducer } from "../../redux/slices/auth";
 import { toast } from "react-toastify";
 import { Form } from "antd";
 import React from "react";
+import { storageService } from "../../services/storage.service";
 
 export const useLoginProps = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ export const useLoginProps = () => {
       .login(body)
       .then((res) => {
         dispatch(authTokenReducer(res.data.token));
+        storageService.setAccessToken(res.data.token);
         toast.success("Successful", {
           position: "top-right",
           autoClose: 5000,

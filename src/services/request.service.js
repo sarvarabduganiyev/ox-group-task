@@ -1,23 +1,25 @@
 import { notification } from "antd";
 import axios from "axios";
 import { storageService } from "./storage.service";
-import { BASE_URL } from "./../configs/app-global";
+
+import {
+  AUTH_CONTENT_TYPE,
+  AUTH_TOKEN_TYPE,
+  AUTH_TOKEN_TYPE_VALUE,
+  BASE_URL,
+  TOKEN_PAYLOAD_KEY,
+} from "./../configs/app-global";
+
 const service = axios.create({
   baseURL: BASE_URL,
   timeout: 16000,
 });
 
-// Config
-const TOKEN_PAYLOAD_KEY = "Authorization";
-const AUTH_TOKEN_TYPE = "Bearer";
-const AUTH_CONTENT_TYPE = "Content-Type";
-const AUTH_TOKEN_TYPE_VALUE = "application/x-www-form-urlencoded";
+// request in interceptors
 
 service.interceptors.request.use(
   (config) => {
-    const access_token = JSON.parse(
-      storageService.getAccessToken()
-    ).accessToken.slice(1, -1);
+    const access_token = storageService.getAccessToken();
 
     if (access_token) {
       config.headers[TOKEN_PAYLOAD_KEY] = AUTH_TOKEN_TYPE + " " + access_token;
@@ -36,7 +38,9 @@ service.interceptors.request.use(
   }
 );
 
+// response in interceptors
 service.interceptors.response.use((response) => {
   return response;
 });
+
 export default service;

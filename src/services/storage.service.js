@@ -1,4 +1,4 @@
-const AUTH_TOKEN = "persist:auth";
+import { AUTH_TOKEN } from "../configs/app-global";
 
 class StorageService {
   setItem(key, value) {
@@ -11,12 +11,6 @@ class StorageService {
 
   removeItem(key) {
     window.localStorage.removeItem(key);
-  }
-
-  clear() {
-    window.localStorage.clear();
-    window.sessionStorage.clear();
-    window.document.cookie = "";
   }
 
   getAccessToken = () => this.getItem(AUTH_TOKEN);

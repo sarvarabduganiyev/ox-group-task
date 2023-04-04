@@ -55,6 +55,9 @@ export const useLoginProps = () => {
           progress: undefined,
           theme: "colored",
         });
+      })
+      .finally(() => {
+        setLoading(false);
       });
     console.log(values);
   };
